@@ -1,0 +1,24 @@
+type = theme
+name = MyTheme
+description = A short description of this theme.
+backdrop = 1.x
+base theme = basis
+
+; Add custom CSS files.
+stylesheets[all][] = css/mytheme.css
+
+; Add print-specific CSS files.
+stylesheets[print][] = css/mytheme_print.css
+
+; Add CKEditor-specific CSS files.
+ckeditor_stylesheets[] = css/mytheme_ckeditor.css
+
+; Remove unwanted core CSS files.
+stylesheets[all][] = menu-dropdown.theme.css
+
+; Add custom JavaScript files.
+scripts[] = js/mytheme.js
+
+; Indicate that this theme has color support.
+settings[color] = true
+settings[dark_mode] = false
