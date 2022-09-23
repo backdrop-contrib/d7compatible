@@ -1,7 +1,15 @@
 Drupal 7 Compatible
 ====================
 
-A base theme that restores Drupal-7-style makrup. Changes are noted below.
+A base theme that restores Drupal-7-style makrup. 
+
+This theme is intended to make it possible to run your Drupal 7 theme on a 
+Backdrop website without needing to update all your CSS selectors.
+
+Some changes will still be necessary, but rewriting all the CSS from your Drupal
+theme should not be part of your todo list.
+
+Specific changes are noted below.
 
 Page template changes:
 - Add back unique classes for each page (`page--node-1234`)
