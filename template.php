@@ -121,6 +121,19 @@ function d7compatible_preprocess_field(&$variables) {
   }
 }
 
+/**
+ * Overrides theme_menu_tree().
+ */
+function d7compatible_preprocess_menu_tree(&$variables) {
+  $links = element_children($variables['#tree']);
+  $first_key = reset($links);
+
+  // Add the ID `main-menu-links` to the UL tag for the main menu.
+  if ($variables['#tree'][$first_key]['#theme'] == 'menu_link__main_menu') {
+    $variables['attributes']['id'] = 'main-menu-links';
+  }
+}
+
 /*******************************************************************************
  * Theme functions
  ******************************************************************************/

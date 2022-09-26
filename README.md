@@ -39,6 +39,9 @@ Field template changes:
 - Convert `title_attributes` back to a string.
 - Convert `content_attributes` back to a string.
 
+Menu markup changes:
+- added the ID `main-menu-links` to the UL tag for the main menu.
+
 
 Installation
 ------------
