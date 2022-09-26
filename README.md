@@ -3,11 +3,11 @@ Drupal 7 Compatible
 
 A base theme that restores Drupal-7-style makrup. 
 
-This theme is intended to make it possible to run your Drupal 7 theme on a 
-Backdrop website without needing to update all your CSS selectors.
+This theme makes it possible to run a Drupal 7 theme on a Backdrop website
+without needing to switch all the CSS selectors from IDs to classes.
 
-Some changes will still be necessary, but rewriting all the CSS from your Drupal
-theme should not be part of your todo list.
+Some changes may still be necessary, but this should make the task of getting a
+Drupal 7 theme to work on  Backdrop site much easier.
 
 Specific changes are noted below.
 
@@ -19,12 +19,25 @@ Node template changes:
 - Restore the legacy node ID as the css ID.
 - Restore the legacy `node-teaser` class.
 - Add more template suggestions based on view mode.
+- Convert `classes` back to a string.
+- Convert `attributes` back to a string.
+- Convert `content_attributes` back to a string.
 
 Block template changes:
 - Restore legacy `block-title` class.
 - Restore legacy block ID.
 - Add the `navigation` ID to the main menu block in the header (if it is 
   configured to dispay the top menu only).
+- Convert `classes` back to a string.
+- Convert `attributes` back to a string.
+- Convert `title_attributes` back to a string.
+- Convert `content_attributes` back to a string.
+
+Field template changes:
+- Convert `classes` back to a string.
+- Convert `attributes` back to a string.
+- Convert `title_attributes` back to a string.
+- Convert `content_attributes` back to a string.
 
 
 Installation
