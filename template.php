@@ -79,7 +79,7 @@ function d7compatible_preprocess_block(&$variables) {
   // Add the ID to the main menu block in the header.
   if ($block->module == 'system' && $block->delta == 'main-menu') {
     // Check the menu style to determine which is the header menu.
-    if ($block->settings['block_settings']['style'] == 'top_only') {
+    if (isset($block->settings['block_settings']['style']) && $block->settings['block_settings']['style'] == 'top_only') {
       $variables['attributes']['id'] = 'navigation';
       $variables['header_menu'] = TRUE;
     }
