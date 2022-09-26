@@ -41,6 +41,12 @@ function d7compatible_preprocess_node(&$variables) {
   // Restore the legacy node ID as the css ID.
   $variables['attributes']['id'] = 'node-' . $variables['node']->nid;
 
+  // Restore classes and attributes to strings.
+  $variables['classes'] = implode(' ', $variables['classes']);
+  $variables['attributes'] = backdrop_attributes($variables['attributes']);
+  $variables['content_attributes'] = backdrop_attributes($variables['content_attributes']);
+  
+
   // Restore legacy `node-teaser` class.
   if ($variables['view_mode'] == 'teaser') {
     $variables['theme_hook_suggestions'][] = 'node__resource__teaser';
@@ -82,6 +88,73 @@ function d7compatible_preprocess_block(&$variables) {
     if (isset($block->settings['block_settings']['style']) && $block->settings['block_settings']['style'] == 'top_only') {
       $variables['attributes']['id'] = 'navigation';
       $variables['header_menu'] = TRUE;
+    }
+  }
+
+  // Restore classes to strings.
+  $variables['classes'] = implode(' ', $variables['classes']);
+
+  // Restore attributes to strings.
+  if (!empty($variables['attributes'])) {
+    $variables['attributes'] = backdrop_attributes($variables['attributes']);
+  }
+  else {
+    $variables['attributes'] = '';
+  }
+
+  if (!empty($variables['title_attributes'])) {
+    $variables['title_attributes'] = backdrop_attributes($variables['title_attributes']);
+  }
+  else {
+    $variables['title_attributes'] = '';
+  }
+  
+  if (!empty($variables['content_attributes'])) {
+    $variables['content_attributes'] = backdrop_attributes($variables['content_attributes']);
+  }
+  else {
+    $variables['content_attributes'] = '';
+  }
+}
+
+/**
+ * Prepares variables for node templates.
+ *
+ * @see field.tpl.php and derivatives.
+ */
+function d7compatible_preprocess_field(&$variables) {
+  // Restore classes to strings.
+  $variables['classes'] = implode(' ', $variables['classes']);
+
+  // Restore attributes to strings.
+  if (!empty($variables['attributes'])) {
+    $variables['attributes'] = backdrop_attributes($variables['attributes']);
+  }
+  else {
+    $variables['attributes'] = '';
+  }
+
+  if (!empty($variables['title_attributes'])) {
+    $variables['title_attributes'] = backdrop_attributes($variables['title_attributes']);
+  }
+  else {
+    $variables['title_attributes'] = '';
+  }
+
+  if (!empty($variables['content_attributes'])) {
+    $variables['content_attributes'] = backdrop_attributes($variables['content_attributes']);
+  }
+  else {
+    $variables['content_attributes'] = '';
+  }
+
+  // Restore field item attributes to strings.
+  foreach ($variables['item_attributes'] as $delta => $item_attributes) {
+    if (!empty($item_attributes[$delta])) {
+      $variables['item_attributes'][$delta] = backdrop_attributes($variables['item_attributes'][$delta]);
+    }
+    else {
+      $variables['item_attributes'][$delta] = '';
     }
   }
 }
