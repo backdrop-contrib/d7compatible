@@ -43,9 +43,11 @@ function d7compatible_preprocess_node(&$variables) {
 
   // Restore classes and attributes to strings.
   $variables['classes'] = implode(' ', $variables['classes']);
-  $variables['attributes'] = backdrop_attributes($variables['attributes']);
-  $variables['content_attributes'] = backdrop_attributes($variables['content_attributes']);
-  
+
+  // Restore attributes to strings.
+  d7compatible_attributes_convert($variables['attributes']);
+  //d7compatible_attributes_convert($variables['title_attributes']);
+  d7compatible_attributes_convert($variables['content_attributes']);
 
   // Restore legacy `node-teaser` class.
   if ($variables['view_mode'] == 'teaser') {
@@ -71,7 +73,6 @@ function d7compatible_preprocess_node(&$variables) {
  * @see block.tpl.php and derivatives.
  */
 function d7compatible_preprocess_block(&$variables) {
-  $variables['hook'] = 'block';
   // Restore Drupal-7-style block-title class.
   $variables['title_attributes']['class'][] = 'block-title';
 
@@ -95,26 +96,9 @@ function d7compatible_preprocess_block(&$variables) {
   $variables['classes'] = implode(' ', $variables['classes']);
 
   // Restore attributes to strings.
-  if (!empty($variables['attributes'])) {
-    $variables['attributes'] = backdrop_attributes($variables['attributes']);
-  }
-  else {
-    $variables['attributes'] = '';
-  }
-
-  if (!empty($variables['title_attributes'])) {
-    $variables['title_attributes'] = backdrop_attributes($variables['title_attributes']);
-  }
-  else {
-    $variables['title_attributes'] = '';
-  }
-  
-  if (!empty($variables['content_attributes'])) {
-    $variables['content_attributes'] = backdrop_attributes($variables['content_attributes']);
-  }
-  else {
-    $variables['content_attributes'] = '';
-  }
+  d7compatible_attributes_convert($variables['attributes']);
+  d7compatible_attributes_convert($variables['title_attributes']);
+  d7compatible_attributes_convert($variables['content_attributes']);
 }
 
 /**
@@ -127,35 +111,13 @@ function d7compatible_preprocess_field(&$variables) {
   $variables['classes'] = implode(' ', $variables['classes']);
 
   // Restore attributes to strings.
-  if (!empty($variables['attributes'])) {
-    $variables['attributes'] = backdrop_attributes($variables['attributes']);
-  }
-  else {
-    $variables['attributes'] = '';
-  }
-
-  if (!empty($variables['title_attributes'])) {
-    $variables['title_attributes'] = backdrop_attributes($variables['title_attributes']);
-  }
-  else {
-    $variables['title_attributes'] = '';
-  }
-
-  if (!empty($variables['content_attributes'])) {
-    $variables['content_attributes'] = backdrop_attributes($variables['content_attributes']);
-  }
-  else {
-    $variables['content_attributes'] = '';
-  }
+  d7compatible_attributes_convert($variables['attributes']);
+  d7compatible_attributes_convert($variables['title_attributes']);
+  d7compatible_attributes_convert($variables['content_attributes']);
 
   // Restore field item attributes to strings.
   foreach ($variables['item_attributes'] as $delta => $item_attributes) {
-    if (!empty($item_attributes[$delta])) {
-      $variables['item_attributes'][$delta] = backdrop_attributes($variables['item_attributes'][$delta]);
-    }
-    else {
-      $variables['item_attributes'][$delta] = '';
-    }
+    d7compatible_attributes_convert($variables['item_attributes'][$delta]);
   }
 }
 
@@ -182,6 +144,27 @@ function d7compatible_breadcrumb($variables) {
   return $output;
 }
 
+/*******************************************************************************
+ * Helper functions
+ ******************************************************************************/
+
+/**
+ * Helper function to restore attributes to strings.
+ * 
+ * @param array $attributes
+ *   Array of attributes common to Backdrop.
+ * 
+ * @return string
+ *   String of attributes as expected by Drupal.
+ */
+function d7compatible_attributes_convert(&$attributes = array()) {
+  if (!empty($attributes)) {
+    $attributes = backdrop_attributes($attributes);
+  }
+  else {
+    $attributes = '';
+  }
+}
 
 /**
  * Helper function to create a HTML ID from any string.
