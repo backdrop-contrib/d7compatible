@@ -41,19 +41,18 @@ function d7compatible_preprocess_node(&$variables) {
   // Restore the legacy node ID as the css ID.
   $variables['attributes']['id'] = 'node-' . $variables['node']->nid;
 
-  // Restore classes and attributes to strings.
+  // Restore legacy `node-teaser` class.
+  if ($variables['view_mode'] == 'teaser') {
+    $variables['theme_hook_suggestions'][] = 'node__resource__teaser';
+    $variables['classes'][] = 'node-teaser';      
+  }
+  // Restore classes to strings.
   $variables['classes'] = implode(' ', $variables['classes']);
 
   // Restore attributes to strings.
   d7compatible_attributes_convert($variables['attributes']);
   //d7compatible_attributes_convert($variables['title_attributes']);
   d7compatible_attributes_convert($variables['content_attributes']);
-
-  // Restore legacy `node-teaser` class.
-  if ($variables['view_mode'] == 'teaser') {
-    $variables['theme_hook_suggestions'][] = 'node__resource__teaser';
-    $variables['classes'][] = 'node-teaser';      
-  }
 
   // Add more template suggestions based on view mode.
   if (!in_array($variables['view_mode'], array('full', 'teaser'))) {
