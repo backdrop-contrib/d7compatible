@@ -43,7 +43,6 @@ function d7compatible_preprocess_node(&$variables) {
 
   // Restore legacy `node-teaser` class.
   if ($variables['view_mode'] == 'teaser') {
-    $variables['theme_hook_suggestions'][] = 'node__resource__teaser';
     $variables['classes'][] = 'node-teaser';      
   }
   // Restore classes to strings.
