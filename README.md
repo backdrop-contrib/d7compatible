@@ -1,7 +1,7 @@
 Drupal 7 Compatible
 ====================
 
-A base theme that restores Drupal-7-style makrup. 
+A base theme that restores Drupal-7-style markup. 
 
 This theme makes it possible to run a Drupal 7 theme on a Backdrop website
 without needing to switch all the CSS selectors from IDs to classes.
@@ -51,12 +51,12 @@ Installation
 
 - Add your Drupal 7 theme to your Backdrop site.
 
-- Make the following cahnges to the info file of your Drupal 7 theme:
+- Make the following changes to the info file of your Drupal 7 theme:
   1) add `base theme = d7compatible`
   1) add `backdrop = 1.x`
   1) add `type = theme`
 
-- Make the following cahnges to the templates of your Drupal 7 theme:
+- Make the following changes to the templates of your Drupal 7 theme:
   1) Remove your old `page.tpl.php` file 
     (or rename it to `layout--mytheme.tpl.php` -- you will need it later to 
      create a Layout Template)
